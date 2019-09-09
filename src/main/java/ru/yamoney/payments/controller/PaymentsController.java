@@ -33,6 +33,9 @@ public class PaymentsController {
 
     @PostMapping("/addPayment")
     public PaymentDto addPayment(@Validated final PaymentCreateDto paymentDto) {
+        if (paymentDto.getSenderUserId().equals(paymentDto.getRecipientUserId())) {
+            throw new IllegalArgumentException("Recipient and sender cannot be one user");
+        }
         final Payment payment = paymentsService.addPayment(paymentDto);
         return paymentMapper.entityToDto(payment);
     }

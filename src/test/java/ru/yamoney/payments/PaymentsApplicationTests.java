@@ -83,6 +83,18 @@ public class PaymentsApplicationTests {
     }
 
     @Test
+    public void addPaymentOneUserFailTest() throws Exception {
+        this.mockMvc.perform(post("/addPayment")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .content(buildUrlEncodedFormEntity(
+                        "senderUserId", "2",
+                        "recipientUserId", "2",
+                        "amount", "5000")))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().contentType("application/json;charset=UTF-8"));
+    }
+
+    @Test
     public void addPaymentNotRecipientUserFailTest() throws Exception {
         this.mockMvc.perform(post("/addPayment")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
