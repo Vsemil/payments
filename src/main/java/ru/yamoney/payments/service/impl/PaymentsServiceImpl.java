@@ -23,12 +23,12 @@ public class PaymentsServiceImpl implements PaymentsService {
     private final UserRepository userRepository;
 
     @Override
-    public Payment addPayment(PaymentCreateDto paymentDto) {
-        User senderUser = userRepository.findById(paymentDto.getSenderUserId())
+    public Payment addPayment(final PaymentCreateDto paymentDto) {
+        final User senderUser = userRepository.findById(paymentDto.getSenderUserId())
                 .orElseThrow(() -> new NotFoundException("user sender not found"));
-        User recipientUser = userRepository.findById(paymentDto.getRecipientUserId())
+        final User recipientUser = userRepository.findById(paymentDto.getRecipientUserId())
                 .orElseThrow(() -> new NotFoundException("user recipient not found"));
-        Payment payment = new Payment();
+        final Payment payment = new Payment();
         payment.setAmount(new BigDecimal(paymentDto.getAmount()));
         payment.setSenderUser(senderUser);
         payment.setRecipientUser(recipientUser);
@@ -41,7 +41,7 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     @Override
-    public AmountOfExpensesDto getAmountOfExpenses(Long userId) {
+    public AmountOfExpensesDto getAmountOfExpenses(final Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("user by id=" + userId + " not found"));
         return paymentsRepository.getAmountOfExpenses(userId);

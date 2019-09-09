@@ -32,14 +32,14 @@ public class PaymentsController {
     }
 
     @PostMapping("/addPayment")
-    public PaymentDto addPayment(@Validated PaymentCreateDto paymentDto) {
-        Payment payment = paymentsService.addPayment(paymentDto);
+    public PaymentDto addPayment(@Validated final PaymentCreateDto paymentDto) {
+        final Payment payment = paymentsService.addPayment(paymentDto);
         return paymentMapper.entityToDto(payment);
     }
 
     @GetMapping("/amountOfExpenses")
-    public AmountOfExpensesDto getAmountOfExpenses(@RequestParam Long userId) {
-        AmountOfExpensesDto amountOfExpenses = paymentsService.getAmountOfExpenses(userId);
+    public AmountOfExpensesDto getAmountOfExpenses(@RequestParam final Long userId) {
+        final AmountOfExpensesDto amountOfExpenses = paymentsService.getAmountOfExpenses(userId);
         return amountOfExpenses == null ? new AmountOfExpensesDto(userId, new BigDecimal(0)) : amountOfExpenses;
     }
 

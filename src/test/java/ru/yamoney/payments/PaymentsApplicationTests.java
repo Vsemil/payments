@@ -127,6 +127,14 @@ public class PaymentsApplicationTests {
     }
 
     @Test
+    public void getAmountOfExpensesNotUserIdFailTest() throws Exception {
+        this.mockMvc.perform(get("/amountOfExpenses")
+                .accept(parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().contentType("application/json;charset=UTF-8"));
+    }
+
+    @Test
     public void getAmountOfExpensesUserNotFoundFailTest() throws Exception {
         this.mockMvc.perform(get("/amountOfExpenses").param("userId", "147")
                 .accept(parseMediaType("application/json;charset=UTF-8")))

@@ -1,4 +1,4 @@
-package ru.yamoney.payments.exception;
+package ru.yamoney.payments.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Data
 @Builder
-class ApiErrorResponse {
+public class ApiErrorResponse {
     private HttpStatus status;
     private Integer error_code;
     private String message;
